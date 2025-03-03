@@ -1,11 +1,13 @@
 {
-  "name": "elysia-template",
-  "version": "1.0.50",
+  "name": "transdata",
+  "version": "0.0.1",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
+    "@elysiajs/swagger": "^1.2.2",
+    "databridge-pack": "^1.0.6",
     "elysia": "latest",
     "logestic": "^1.2.4",
     "minimist": "^1.2.8"
