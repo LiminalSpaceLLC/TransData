@@ -6,11 +6,7 @@
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
-    "@elysiajs/swagger": "^1.2.2",
-    "databridge-pack": "^1.0.6",
-    "elysia": "latest",
-    "logestic": "^1.2.4",
-    "minimist": "^1.2.8"
+    "urn-development-pack": "^100.0.10"
   },
   "devDependencies": {
     "bun-types": "latest"
