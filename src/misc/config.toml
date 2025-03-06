@@ -5,6 +5,9 @@ debug = false
 mongodb = "mongodb://127.0.0.1:27017"
 dbName = "TransData"
 
+[security]
+jwtsecret = "oTu9iquooh1ieta#P1ge"
+
 [server]
 host = "127.0.0.1"
 port = 5000

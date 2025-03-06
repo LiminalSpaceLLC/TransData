@@ -1,6 +1,6 @@
-import cfgRaw from '../config.toml'
+import { userController } from "@controller/user.c";
+import { getConfig } from "@misc/config";
 import { dbInit, dbCheck } from "@misc/helper";
-import { Config } from "@misc/type";
 import { Dbi, connectDatabase, Elysia, swagger, Logestic } from "urn-development-pack";
 
 /**
@@ -10,21 +10,16 @@ import { Dbi, connectDatabase, Elysia, swagger, Logestic } from "urn-development
  * 
  */
 
-const cfg = cfgRaw as Config
+export const glo = getConfig()
 const env = Bun.env
 
-
-if (cfg.system.debug) console.log(cfgRaw);
-if (cfg.system.debug) console.log(env);
-
-export const db = new Dbi(cfg.database.dbName, await connectDatabase(cfg.database.mongodb))
+export const db = new Dbi(glo.cfg.database.dbName, await connectDatabase(glo.cfg.database.mongodb))
 
 if (env.DBINIT === '1') await dbInit()
 
 await dbCheck()
 
-
-const app = new Elysia()
+export const app = new Elysia()
   .use(swagger())
   .onError(({ error, set }) => {
     if (set.status === 500) {
@@ -53,11 +48,11 @@ const app = new Elysia()
   .guard((app) =>
     app
       .use(Logestic.preset('fancy'))
+      .use(userController)
   )
-  .listen(cfg.server)
-
-console.log(
-  `TransData is running at ${app.server?.hostname}:${app.server?.port}
+  .listen(glo.cfg.server);
+console.log(`
+TransData is running at ${app.server?.hostname}:${app.server?.port}
 
 ----------------------------------------------------------------------
 | A LiminalSpace Inc. Product // Contact us at (zh.)liminalspace.top |
